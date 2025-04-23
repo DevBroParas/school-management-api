@@ -1,37 +1,23 @@
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
+// Load environment variables
 dotenv.config();
 
-(async () => {
-  const connection = await mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-  });
-
-  await connection.query(
-    `CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME}`
-  );
-  await connection.query(`
-    CREATE TABLE IF NOT EXISTS ${process.env.DB_NAME}.schools (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      address VARCHAR(255) NOT NULL,
-      latitude FLOAT(10, 6) NOT NULL,
-      longitude FLOAT(10, 6) NOT NULL
-    )
-  `);
-  await connection.end();
-})();
-
+// Create a MySQL connection pool with environment variables
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: process.env.DB_HOST || "localhost", // Use Railway DB host or fallback to localhost
+  user: process.env.DB_USER || "root", // Use Railway DB user or fallback to local settings
+  password: process.env.DB_PASSWORD || "Paras@7678", // Use Railway DB password or fallback
+  database: process.env.DB_NAME || "school_management", // Use Railway DB name or fallback
   waitForConnections: true,
   connectionLimit: 10,
 });
+
+// Optional: Check MySQL connection success
+pool
+  .getConnection()
+  .then(() => console.log("✅ MySQL connected successfully!"))
+  .catch((err) => console.error("❌ MySQL connection failed:", err));
 
 export default pool;
