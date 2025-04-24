@@ -19,7 +19,8 @@ This is a RESTful API for managing schools, including adding schools and listing
 
 - **Node.js** (v16 or higher)
 - **MySQL** (v8 or higher)
-- **Railway** (for deployment, optional)
+- **RDS** (for database)
+- **RENDER** (for Node Application)
 
 ## Installation
 
