@@ -134,4 +134,4 @@ school-management-api/
 
 ## Author
 
-- **DevBroParas**: [GitHub Profile](https://github.com/DevBroParas/school-management-api>)
+- **DevBroParas**: [GitHub Profile](https://github.com/DevBroParas/school-management-api/tree/main)
